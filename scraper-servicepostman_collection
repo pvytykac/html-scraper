@@ -1,0 +1,40 @@
+{
+	"info": {
+		"_postman_id": "8b852926-a362-4c48-a7f5-4f86eb43da14",
+		"name": "Scraper Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1937770"
+	},
+	"item": [
+		{
+			"name": "/v1/scraper/scrape-data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"url\": \"https://dennikn.sk\",\r\n    \"fields\": [\r\n        {\r\n            \"name\": \"footer-text\",\r\n            \"selector\": \".n3_footer_legal\"\r\n        }\r\n    ],\r\n    \"metadata\": [\r\n        {\r\n            \"name\": \"viewport\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/scraper/scrape-data",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"scraper",
+						"scrape-data"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
