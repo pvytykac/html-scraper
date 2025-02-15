@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"url\": \"https://dennikn.sk\",\r\n    \"fields\": [\r\n        {\r\n            \"name\": \"footer-text\",\r\n            \"selector\": \".n3_footer_legal\"\r\n        }\r\n    ],\r\n    \"metadata\": [\r\n        {\r\n            \"name\": \"viewport\"\r\n        }\r\n    ]\r\n}",
+					"raw": "{\r\n    \"url\": \"https://www.alza.cz/aeg-7000-prosteam-lfr73964cc-d7635493.htm\",\r\n    \"fields\": [\r\n        {\r\n            \"name\": \"price\",\r\n            \"selector\": \".price-box__price\"\r\n        },\r\n        {\r\n            \"name\": \"rating_count\",\r\n            \"selector\": \".ratingCount\"\r\n        },\r\n        {\r\n            \"name\": \"rating_value\",\r\n            \"selector\": \".ratingValue\"\r\n        }\r\n    ],\r\n    \"metadata\": [\r\n        {\r\n            \"name\": \"keywords\"\r\n        },\r\n        {\r\n            \"name\": \"twitter:image\"\r\n        }\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
