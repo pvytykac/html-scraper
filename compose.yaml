@@ -7,10 +7,28 @@
 # You can add other services your application may depend on here, such as a
 # database or a cache. For examples, see the Awesome Compose repository:
 # https://github.com/docker/awesome-compose
+networks:
+  web:
+    external: false
+    driver: bridge
+
 services:
-  server:
-    build:
-      context: .
+  browser:
+    image: selenium/standalone-chrome:latest
+    networks:
+      - web
+    privileged: true
+    shm_size: 2g
+    ports:
+      - 4444:4444
+  api:
+    build: .
+    networks:
+      - web
+    depends_on:
+      - browser
+    environment:
+      - BROWSER_URL=http://browser:4444
     ports:
       - 8080:8080
 

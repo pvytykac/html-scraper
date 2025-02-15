@@ -2,12 +2,18 @@ package net.pvytykac.api;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.junit.ClassRule;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.testcontainers.containers.BrowserWebDriverContainer;
 
 import static java.util.Collections.singletonList;
 import static org.hamcrest.Matchers.equalTo;
@@ -19,11 +25,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @author Paly
  * @since 2025-02-15
  */
-@SpringBootTest
+@SpringBootTest(classes = {ScraperEndpointTest.TestConfigurationOverride.class})
 @AutoConfigureMockMvc
 class ScraperEndpointTest {
 
     private final MockMvc mvc;
+
+    //todo: migrate to junit5 way
+    @ClassRule
+    public static BrowserWebDriverContainer<?> BROWSER = new BrowserWebDriverContainer<>()
+            .withCapabilities(new ChromeOptions());
+
+    static {
+        BROWSER.start();
+    }
 
     @Autowired
     public ScraperEndpointTest(MockMvc mvc) {
@@ -71,5 +86,14 @@ class ScraperEndpointTest {
                 .andExpect(jsonPath("$.errors[?(@.field == 'fields[0].name')].message", equalTo(singletonList("must not be blank"))))
                 .andExpect(jsonPath("$.errors[?(@.field == 'fields[0].selector')].message", equalTo(singletonList("must not be blank"))))
                 .andExpect(jsonPath("$.errors[?(@.field == 'metadata[0].name')].message", equalTo(singletonList("must not be blank"))));
+    }
+
+    @TestConfiguration
+    public static class TestConfigurationOverride {
+        @Bean
+        @Qualifier("browser-url")
+        public String getBrowserUrl() {
+            return ScraperEndpointTest.BROWSER.getSeleniumAddress().toString();
+        }
     }
 }
