@@ -1,9 +1,13 @@
+[![Java CI with Maven](https://github.com/pvytykac/html-scraper/actions/workflows/maven.yml/badge.svg)](https://github.com/pvytykac/html-scraper/actions/workflows/maven.yml)
+
 ### Building and running your application
 
 When you're ready, start your application by running:
 `docker compose up --build`.
 
 Your application will be available at http://localhost:8080.
+
+Import `scraper-service.postman_collection` into Postman to execute HTTP requests
 
 ### Deploying your application to the cloud
 
